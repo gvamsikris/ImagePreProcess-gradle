@@ -1,6 +1,5 @@
 package com.reverend.imagePreProcess.model;
 
-// Generated 23 Jul, 2014 11:21:33 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
