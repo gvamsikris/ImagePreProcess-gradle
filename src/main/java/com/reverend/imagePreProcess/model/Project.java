@@ -1,6 +1,7 @@
 package com.reverend.imagePreProcess.model;
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
@@ -25,28 +28,34 @@ public class Project implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5994309006658949113L;
+	private static final long serialVersionUID = 644623798630109799L;
 	private Long id;
 	private long version;
+	private Date dateCreated;
+	private Date lastUpdated;
 	private String path;
 	private String preProcessor;
 	private String supervisor;
-	private Set<ProjectBatch> projectBatches = new HashSet<ProjectBatch>(0);
+	private Set<Batch> batchs = new HashSet<Batch>(0);
 
 	public Project() {
 	}
 
-	public Project(String path, String preProcessor, String supervisor) {
+	public Project(Date dateCreated, Date lastUpdated, String path, String preProcessor, String supervisor) {
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
 		this.path = path;
 		this.preProcessor = preProcessor;
 		this.supervisor = supervisor;
 	}
 
-	public Project(String path, String preProcessor, String supervisor, Set<ProjectBatch> projectBatches) {
+	public Project(Date dateCreated, Date lastUpdated, String path, String preProcessor, String supervisor, Set<Batch> batchs) {
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
 		this.path = path;
 		this.preProcessor = preProcessor;
 		this.supervisor = supervisor;
-		this.projectBatches = projectBatches;
+		this.batchs = batchs;
 	}
 
 	@Id
@@ -68,6 +77,26 @@ public class Project implements java.io.Serializable {
 
 	public void setVersion(long version) {
 		this.version = version;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_CREATED", nullable = false, length = 23)
+	public Date getDateCreated() {
+		return this.dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATED", nullable = false, length = 23)
+	public Date getLastUpdated() {
+		return this.lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	@Column(name = "PATH", nullable = false)
@@ -98,12 +127,12 @@ public class Project implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-	public Set<ProjectBatch> getProjectBatches() {
-		return this.projectBatches;
+	public Set<Batch> getBatchs() {
+		return this.batchs;
 	}
 
-	public void setProjectBatches(Set<ProjectBatch> projectBatches) {
-		this.projectBatches = projectBatches;
+	public void setBatchs(Set<Batch> batchs) {
+		this.batchs = batchs;
 	}
 
 }

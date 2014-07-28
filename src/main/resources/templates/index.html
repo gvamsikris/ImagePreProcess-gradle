@@ -11,11 +11,15 @@
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
-					<a class="brand" href="https://github.com/ultraq/thymeleaf-layout-dialect">Thymeleaf - Layout </a>
 					<ul class="nav">
-						<li><a th:href="@{/}" href="messages.html"> Messages </a></li>
+						<li><a href="home.html">Home</a></li>
+						<li><a href="search.html">Search</a></li>
 					</ul>
 				</div>
+				<form action="project.html" method="post">
+					<input type="text" id="path" name="path" />
+					<input type="submit" value="Create"/>
+				</form>
 			</div>
 			<h1 layout:fragment="header">Layout</h1>
 			<div layout:fragment="content">Fake content</div>

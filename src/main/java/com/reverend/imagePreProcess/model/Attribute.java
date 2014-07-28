@@ -1,8 +1,7 @@
 package com.reverend.imagePreProcess.model;
 
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +10,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
@@ -27,26 +27,25 @@ public class Attribute implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1185414209994005840L;
+	private static final long serialVersionUID = 3208740864211595779L;
 	
 	private Long id;
 	private long version;
 	private AttributeType attributeType;
+	private Image image;
+	private Date dateCreated;
+	private Date lastUpdated;
 	private String value;
-	private Set<ImageAttribute> imageAttributes = new HashSet<ImageAttribute>(0);
 
 	public Attribute() {
 	}
 
-	public Attribute(AttributeType attributeType, String value) {
+	public Attribute(AttributeType attributeType, Image image, Date dateCreated, Date lastUpdated, String value) {
 		this.attributeType = attributeType;
+		this.image = image;
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
 		this.value = value;
-	}
-
-	public Attribute(AttributeType attributeType, String value, Set<ImageAttribute> imageAttributes) {
-		this.attributeType = attributeType;
-		this.value = value;
-		this.imageAttributes = imageAttributes;
 	}
 
 	@Id
@@ -80,6 +79,36 @@ public class Attribute implements java.io.Serializable {
 		this.attributeType = attributeType;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "IMAGE_ID", nullable = false)
+	public Image getImage() {
+		return this.image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_CREATED", nullable = false, length = 23)
+	public Date getDateCreated() {
+		return this.dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATED", nullable = false, length = 23)
+	public Date getLastUpdated() {
+		return this.lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
 	@Column(name = "VALUE", nullable = false)
 	public String getValue() {
 		return this.value;
@@ -87,15 +116,6 @@ public class Attribute implements java.io.Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attribute")
-	public Set<ImageAttribute> getImageAttributes() {
-		return this.imageAttributes;
-	}
-
-	public void setImageAttributes(Set<ImageAttribute> imageAttributes) {
-		this.imageAttributes = imageAttributes;
 	}
 
 }

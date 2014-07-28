@@ -1,6 +1,7 @@
 package com.reverend.imagePreProcess.model;
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
@@ -25,10 +28,11 @@ public class AttributeType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3762690371925672113L;
-	
+	private static final long serialVersionUID = 5785631434342083675L;
 	private Long id;
 	private long version;
+	private Date dateCreated;
+	private Date lastUpdated;
 	private String name;
 	private Set<AttributeValue> attributeValues = new HashSet<AttributeValue>(0);
 	private Set<Attribute> attributes = new HashSet<Attribute>(0);
@@ -36,11 +40,15 @@ public class AttributeType implements java.io.Serializable {
 	public AttributeType() {
 	}
 
-	public AttributeType(String name) {
+	public AttributeType(Date dateCreated, Date lastUpdated, String name) {
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
 		this.name = name;
 	}
 
-	public AttributeType(String name, Set<AttributeValue> attributeValues, Set<Attribute> attributes) {
+	public AttributeType(Date dateCreated, Date lastUpdated, String name, Set<AttributeValue> attributeValues, Set<Attribute> attributes) {
+		this.dateCreated = dateCreated;
+		this.lastUpdated = lastUpdated;
 		this.name = name;
 		this.attributeValues = attributeValues;
 		this.attributes = attributes;
@@ -65,6 +73,26 @@ public class AttributeType implements java.io.Serializable {
 
 	public void setVersion(long version) {
 		this.version = version;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_CREATED", nullable = false, length = 23)
+	public Date getDateCreated() {
+		return this.dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATED", nullable = false, length = 23)
+	public Date getLastUpdated() {
+		return this.lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	@Column(name = "NAME", nullable = false)

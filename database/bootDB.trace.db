@@ -30,3 +30,71 @@ alter table project_batch
 org.h2.jdbc.JdbcSQLException: Table "PROJECT_BATCH" not found; SQL statement:
 alter table project_batch 
         drop constraint FK_m13rpi30mu8vp01lnarrxiyqb if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table attribute 
+        drop constraint FK_q92ayyte995yvcsl9btng1551 if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE_VALUE" not found; SQL statement:
+alter table attribute_value 
+        drop constraint FK_ieb7qd1jus4dstrtsvruhgv0w if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "BATCH" not found; SQL statement:
+alter table batch 
+        drop constraint FK_1h7prgcntwctt3hbf72aw916w if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image 
+        drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE_ATTRIBUTE" not found; SQL statement:
+alter table image_attribute 
+        drop constraint FK_857k3n4sc26mk8yvjicpult9y if exists [42102-176]
+07-28 16:17:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE_ATTRIBUTE" not found; SQL statement:
+alter table image_attribute 
+        drop constraint FK_9e8skstudswsub7rbjs5slmkr if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table attribute 
+        drop constraint FK_q92ayyte995yvcsl9btng1551 if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE_VALUE" not found; SQL statement:
+alter table attribute_value 
+        drop constraint FK_ieb7qd1jus4dstrtsvruhgv0w if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "BATCH" not found; SQL statement:
+alter table batch 
+        drop constraint FK_1h7prgcntwctt3hbf72aw916w if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image 
+        drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE_ATTRIBUTE" not found; SQL statement:
+alter table image_attribute 
+        drop constraint FK_857k3n4sc26mk8yvjicpult9y if exists [42102-176]
+07-28 16:19:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE_ATTRIBUTE" not found; SQL statement:
+alter table image_attribute 
+        drop constraint FK_9e8skstudswsub7rbjs5slmkr if exists [42102-176]
+07-28 16:55:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table attribute 
+        drop constraint FK_q92ayyte995yvcsl9btng1551 if exists [42102-176]
+07-28 16:55:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table attribute 
+        drop constraint FK_p9gymx63g54h1tskulaj9w7dg if exists [42102-176]
+07-28 16:55:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE_VALUE" not found; SQL statement:
+alter table attribute_value 
+        drop constraint FK_ieb7qd1jus4dstrtsvruhgv0w if exists [42102-176]
+07-28 16:55:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "BATCH" not found; SQL statement:
+alter table batch 
+        drop constraint FK_1h7prgcntwctt3hbf72aw916w if exists [42102-176]
+07-28 16:55:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image 
+        drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]
