@@ -98,3 +98,33 @@ alter table batch
 org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
 alter table image 
         drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]
+07-28 21:25:47 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute drop constraint FK_q92ayyte995yvcsl9btng1551 if exists [42102-176]
+07-28 21:25:47 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute drop constraint FK_p9gymx63g54h1tskulaj9w7dg if exists [42102-176]
+07-28 21:25:47 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE_VALUE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute_value drop constraint FK_ieb7qd1jus4dstrtsvruhgv0w if exists [42102-176]
+07-28 21:25:47 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "BATCH" not found; SQL statement:
+alter table BOOTDB.PUBLIC.batch drop constraint FK_1h7prgcntwctt3hbf72aw916w if exists [42102-176]
+07-28 21:25:47 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.image drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]
+07-28 21:44:34 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute drop constraint FK_q92ayyte995yvcsl9btng1551 if exists [42102-176]
+07-28 21:44:34 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute drop constraint FK_p9gymx63g54h1tskulaj9w7dg if exists [42102-176]
+07-28 21:44:34 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATTRIBUTE_VALUE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.attribute_value drop constraint FK_ieb7qd1jus4dstrtsvruhgv0w if exists [42102-176]
+07-28 21:44:34 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "BATCH" not found; SQL statement:
+alter table BOOTDB.PUBLIC.batch drop constraint FK_1h7prgcntwctt3hbf72aw916w if exists [42102-176]
+07-28 21:44:34 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table BOOTDB.PUBLIC.image drop constraint FK_sq0vus18vpru69whnyrknn8a3 if exists [42102-176]

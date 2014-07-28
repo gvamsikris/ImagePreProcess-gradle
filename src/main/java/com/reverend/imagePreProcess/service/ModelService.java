@@ -20,8 +20,21 @@ public class ModelService {
 
 	private AttributeTypeHome attributeTypeHome;
 	private AttributeValueHome attributeValueHome;
-
+	
+	
+	
 	@Autowired
+	public ModelService(ProjectHome projectHome, BatchHome batchHome, ImageHome imageHome, AttributeHome attributeHome, AttributeTypeHome attributeTypeHome, AttributeValueHome attributeValueHome) {
+		super();
+		this.projectHome = projectHome;
+		this.batchHome = batchHome;
+		this.imageHome = imageHome;
+		this.attributeHome = attributeHome;
+		this.attributeTypeHome = attributeTypeHome;
+		this.attributeValueHome = attributeValueHome;
+	}
+
+	@Autowired(required= true)
 	public ProjectHome getProjectHome() {
 		return projectHome;
 	}
@@ -30,7 +43,7 @@ public class ModelService {
 		this.projectHome = projectHome;
 	}
 
-	@Autowired
+	@Autowired(required= true)
 	public BatchHome getBatchHome() {
 		return batchHome;
 	}
@@ -39,7 +52,7 @@ public class ModelService {
 		this.batchHome = batchHome;
 	}
 
-	@Autowired
+	@Autowired(required= true)
 	public ImageHome getImageHome() {
 		return imageHome;
 	}
@@ -48,7 +61,7 @@ public class ModelService {
 		this.imageHome = imageHome;
 	}
 
-	@Autowired
+	@Autowired(required= true)
 	public AttributeHome getAttributeHome() {
 		return attributeHome;
 	}
@@ -57,7 +70,7 @@ public class ModelService {
 		this.attributeHome = attributeHome;
 	}
 
-	@Autowired
+	@Autowired(required= true)
 	public AttributeTypeHome getAttributeTypeHome() {
 		return attributeTypeHome;
 	}
@@ -66,7 +79,7 @@ public class ModelService {
 		this.attributeTypeHome = attributeTypeHome;
 	}
 
-	@Autowired
+	@Autowired(required= true)
 	public AttributeValueHome getAttributeValueHome() {
 		return attributeValueHome;
 	}
@@ -74,5 +87,7 @@ public class ModelService {
 	public void setAttributeValueHome(AttributeValueHome attributeValueHome) {
 		this.attributeValueHome = attributeValueHome;
 	}
+	
+	
 
 }

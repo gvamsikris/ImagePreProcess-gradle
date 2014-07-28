@@ -1,6 +1,8 @@
 package com.reverend.imagePreProcess.dao;
 
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -65,6 +67,18 @@ public class ProjectHome {
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
+	public List<Project> findAll() {
+		log.debug("getting all projects");
+		try {
+			List<Project> resultList = entityManager.createQuery("SELECT p from PROJECT p").getResultList();
+			log.debug("get list successful");
+			return resultList;
+		} catch (RuntimeException re) {
+			log.error("get list failed", re);
 			throw re;
 		}
 	}

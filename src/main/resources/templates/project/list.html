@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout">
+<head>
+<meta charset="UTF-8" />
+<title>List projects</title>
+</head>
+<body>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Path</th>
+					<th>Pre-Processor</th>
+					<th>Supervisor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${projects.empty}">
+					<td colspan="3">No Projects</td>
+				</tr>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.path}"></td>
+					<td th:text="${project.preProcessor}"></td>
+					<td th:text="${project.supervisor}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
