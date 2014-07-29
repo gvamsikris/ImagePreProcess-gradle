@@ -1,24 +1,35 @@
 package com.reverend.imagePreProcess.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.reverend.imagePreProcess.dao.BatchRepository;
 import com.reverend.imagePreProcess.dao.ProjectRepository;
+import com.reverend.imagePreProcess.model.Batch;
 import com.reverend.imagePreProcess.model.Project;
 
 @Service
 public class ProjectService {
 
-	private ProjectRepository projectRepository;	
+	private ProjectRepository projectRepository;
+	private BatchRepository batchRepository;
 	
 	@Autowired
-	public ProjectService(ProjectRepository projectRepository) {
+	public ProjectService(ProjectRepository projectRepository, BatchRepository batchRepository) {
 		super();
 		this.projectRepository = projectRepository;
+		this.batchRepository = batchRepository;
 	}
 	
+	@Transactional
 	public Project save(Project project){
-		return projectRepository.save(project);
+		project = projectRepository.save(project);
+		for (Batch batch : project.getBatchs()) {
+			save(batch);
+		}
+		return project;
 	}
 	
 	public Project find(Long id){
@@ -28,6 +39,12 @@ public class ProjectService {
 	
 	public Iterable<Project> findAll(){
 		return projectRepository.findAll();
+	}
+	
+	@Transactional
+	public Batch save(Batch batch){
+		batch = batchRepository.save(batch);
+		return batch;
 	}
 	
 
