@@ -38,7 +38,7 @@ public class ProjectController {
 		return new ModelAndView("project/view", "project", project);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView view(@PathVariable long id){
 		Project project = modelService.getProjectHome().findById(id);
 		return new ModelAndView("project/view", "project", project);

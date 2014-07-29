@@ -74,7 +74,7 @@ public class ProjectHome {
 	public List<Project> findAll() {
 		log.debug("getting all projects");
 		try {
-			List<Project> resultList = entityManager.createQuery("SELECT p from PROJECT p").getResultList();
+			List<Project> resultList = entityManager.createQuery("SELECT p from Project p").getResultList();
 			log.debug("get list successful");
 			return resultList;
 		} catch (RuntimeException re) {
