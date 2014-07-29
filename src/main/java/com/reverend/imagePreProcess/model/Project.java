@@ -4,11 +4,12 @@ package com.reverend.imagePreProcess.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -59,7 +60,7 @@ public class Project implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
 	public Long getId() {
 		return this.id;
@@ -108,7 +109,7 @@ public class Project implements java.io.Serializable {
 		this.path = path;
 	}
 
-	@Column(name = "PRE_PROCESSOR", nullable = false)
+	@Column(name = "PRE_PROCESSOR", nullable = true)
 	public String getPreProcessor() {
 		return this.preProcessor;
 	}
@@ -117,7 +118,7 @@ public class Project implements java.io.Serializable {
 		this.preProcessor = preProcessor;
 	}
 
-	@Column(name = "SUPERVISOR", nullable = false)
+	@Column(name = "SUPERVISOR", nullable = true)
 	public String getSupervisor() {
 		return this.supervisor;
 	}
