@@ -5,9 +5,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.reverend.imagePreProcess.dao.AttributeRepsoitory;
 import com.reverend.imagePreProcess.dao.BatchRepository;
+import com.reverend.imagePreProcess.dao.ImageRepository;
 import com.reverend.imagePreProcess.dao.ProjectRepository;
+import com.reverend.imagePreProcess.model.Attribute;
 import com.reverend.imagePreProcess.model.Batch;
+import com.reverend.imagePreProcess.model.Image;
 import com.reverend.imagePreProcess.model.Project;
 
 @Service
@@ -15,12 +19,16 @@ public class ProjectService {
 
 	private ProjectRepository projectRepository;
 	private BatchRepository batchRepository;
+	private ImageRepository imageRepository;
+	private AttributeRepsoitory attributeRepository;
 	
 	@Autowired
-	public ProjectService(ProjectRepository projectRepository, BatchRepository batchRepository) {
+	public ProjectService(ProjectRepository projectRepository, BatchRepository batchRepository, ImageRepository imageRepository, AttributeRepsoitory attributeRepsoitory) {
 		super();
 		this.projectRepository = projectRepository;
 		this.batchRepository = batchRepository;
+		this.imageRepository = imageRepository;
+		attributeRepository = attributeRepsoitory;
 	}
 	
 	@Transactional
@@ -44,7 +52,23 @@ public class ProjectService {
 	@Transactional
 	public Batch save(Batch batch){
 		batch = batchRepository.save(batch);
+		for (Image image : batch.getImages()) {
+			save(image);
+		}
 		return batch;
+	}
+
+	public Image save(Image image) {
+		image = imageRepository.save(image);
+		for (Attribute attribute : image.getAttributes()) {
+			save(attribute);
+		}
+		return image;
+	}
+
+	public Attribute save(Attribute attribute) {
+		attribute = attributeRepository.save(attribute);
+		return attribute;
 	}
 	
 

@@ -1,9 +1,9 @@
 package com.reverend.imagePreProcess.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Project implements java.io.Serializable {
 	private String path;
 	private String preProcessor;
 	private String supervisor;
-	private Set<Batch> batchs = new HashSet<Batch>(0);
+	private List<Batch> batchs = new ArrayList<Batch>(0);
 
 	public Project() {
 	}
@@ -50,7 +50,7 @@ public class Project implements java.io.Serializable {
 		this.supervisor = supervisor;
 	}
 
-	public Project(Date dateCreated, Date lastUpdated, String path, String preProcessor, String supervisor, Set<Batch> batchs) {
+	public Project(Date dateCreated, Date lastUpdated, String path, String preProcessor, String supervisor, List<Batch> batchs) {
 		this.dateCreated = dateCreated;
 		this.lastUpdated = lastUpdated;
 		this.path = path;
@@ -128,11 +128,11 @@ public class Project implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-	public Set<Batch> getBatchs() {
+	public List<Batch> getBatchs() {
 		return this.batchs;
 	}
 
-	public void setBatchs(Set<Batch> batchs) {
+	public void setBatchs(List<Batch> batchs) {
 		this.batchs = batchs;
 	}
 
