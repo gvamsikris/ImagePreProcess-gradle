@@ -29,8 +29,8 @@ public class ProjectController {
 	private ProjectUtil projectUtil;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView create(@RequestParam("path") String path){
-		Project project = projectUtil.createProject(path);
+	public ModelAndView create(@RequestParam("path") String path, @RequestParam("preProcessor") String preProcessor, @RequestParam("supervisor") String supervisor){
+		Project project = projectUtil.createProject(path, preProcessor, supervisor);
 		projectService.save(project);
 		return new ModelAndView("project/view", "project", project);
 	}

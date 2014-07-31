@@ -1,28 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Layout</title>
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
-		<script type="text/javascript" src="../../js/jquery.min.js"></script>
-		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/angular.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/angular.min.js}" src="../../js/angular.min.js"></script>
+		<script type="text/javascript">
+			
+		</script>
 	</head>
 	<body>
 		<div class="container">
-			<div class="navbar">
-				<div class="navbar-inner">
-					<ul class="nav">
-						<li><a href="home.html">Home</a></li>
-						<li><a href="search.html">Search</a></li>
-					</ul>
-				</div>
-				<form action="project.html" method="post">
-					<input type="text" id="path" name="path" />
-					<input type="submit" value="Create"/>
-				</form>
+			<div class="page-header">
+				<h1><a href="/"><img alt="Reverend" th:src="@{/images-res/logo.jpg}" src="../../images-res/logo.jpg" /></a>Reverend <small>Image Pre Process</small></h1>
 			</div>
-			<h1 layout:fragment="header">Layout</h1>
-			<div layout:fragment="content">Fake content</div>
+			<form action="project.html" method="post" role="form" class="form-horizontal">
+				<fieldset>
+					<legend>Create Project</legend>
+					<div class="form-group">
+						<label for="path" class="col-sm-2 control-label">Path</label>
+						<div class="col-sm-10"><input type="text" id="path" name="path" class="form-control" /></div>
+					</div>
+					<div class="form-group">
+						<label for="preProcessor" class="col-sm-2 control-label">Pre-Processor</label>
+						<div class="col-sm-10"><input type="text" id="preProcessor" name="preProcessor" class="form-control" /></div>
+					</div>
+					<div class="form-group">
+						<label for="supervisor" class="col-sm-2 control-label">Supervisor</label>
+						<div class="col-sm-10"><input type="text" id="supervisor" name="supervisor" class="form-control" /></div>
+					</div>
+					<div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"> </span> Create</button></div>
+				</fieldset>
+				
+			</form>
+			<hr />
+			<div>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Path</th>
+							<th>Pre-Processor</th>
+							<th>Supervisor</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${projects.empty}">
+							<td colspan="4">No Projects</td>
+						</tr>
+						<tr th:each="project : ${projects}">
+							<td th:text="${project.path}"></td>
+							<td th:text="${project.preProcessor}"></td>
+							<td th:text="${project.supervisor}"></td>
+							<td><a href="/project/view/${project.id}" class="btn btn-default">View</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>

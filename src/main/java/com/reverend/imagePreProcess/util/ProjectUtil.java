@@ -6,21 +6,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.springframework.stereotype.Component;
 
 import com.reverend.imagePreProcess.model.Batch;
 import com.reverend.imagePreProcess.model.Project;
 
-
+@Component
 public class ProjectUtil {
 
-	
-
-
-	public Project createProject(String path) {
+	public Project createProject(String path, String preProcessor, String supervisor) {
 		Project project = new Project();
 		project.setDateCreated(new Date());
 		project.setLastUpdated(new Date());
 		project.setPath(path);
+		project.setPreProcessor(preProcessor);
+		project.setSupervisor(supervisor);
 		File projectFolder = new File(path);
 		Set<Batch> batchs = new HashSet<Batch>(0);
 		if (projectFolder.isDirectory()) {

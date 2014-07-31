@@ -15,7 +15,6 @@ import com.reverend.imagePreProcess.util.ProjectUtil;
 @EnableTransactionManagement
 @ComponentScan(basePackages={"com.reverend.imagePreProcess.dao", "com.reverend.imagePreProcess.util", "com.reverend.imagePreProcess.service", "com.reverend.imagePreProcess.controller"})
 @EnableAutoConfiguration
-@Controller
 public class Application {
 
 	public static void main(String[] args) {
@@ -25,11 +24,5 @@ public class Application {
 	@Bean
 	public ProjectUtil getProjectUtil(){
 		return new ProjectUtil();
-	}
-	
-
-	@RequestMapping("/")
-	public String home() {
-		return "index";
 	}
 }
