@@ -4,11 +4,15 @@ package com.reverend.imagePreProcess.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -104,7 +108,7 @@ public class AttributeType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributeType")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributeType", cascade=CascadeType.ALL)
 	public Set<AttributeValue> getAttributeValues() {
 		return this.attributeValues;
 	}

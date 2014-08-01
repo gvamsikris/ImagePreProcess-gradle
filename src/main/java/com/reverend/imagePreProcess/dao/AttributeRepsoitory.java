@@ -1,7 +1,7 @@
 package com.reverend.imagePreProcess.dao;
 
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.reverend.imagePreProcess.model.Attribute;
@@ -12,4 +12,4 @@ import com.reverend.imagePreProcess.model.Attribute;
  *
  */
 @Repository
-public interface AttributeRepsoitory extends CrudRepository<Attribute, Long>{}
+public interface AttributeRepsoitory extends PagingAndSortingRepository<Attribute, Long>{}

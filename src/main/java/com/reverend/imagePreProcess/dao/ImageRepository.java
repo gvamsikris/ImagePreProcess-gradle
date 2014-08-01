@@ -2,6 +2,7 @@ package com.reverend.imagePreProcess.dao;
 
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.reverend.imagePreProcess.model.Image;
@@ -12,4 +13,4 @@ import com.reverend.imagePreProcess.model.Image;
  *
  */
 @Repository
-public interface ImageRepository extends CrudRepository<Image, Long>{}
+public interface ImageRepository extends PagingAndSortingRepository<Image, Long>{}
