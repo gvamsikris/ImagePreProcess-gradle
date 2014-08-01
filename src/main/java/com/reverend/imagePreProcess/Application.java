@@ -22,6 +22,10 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication application = new SpringApplication(Application.class);
 		ConfigurableApplicationContext applicationContext = application.run(args);
+		bootstrap(applicationContext);
+	}
+
+	private static void bootstrap(ConfigurableApplicationContext applicationContext) {
 		AttributeTypeService attributeTypeService = applicationContext.getBean(AttributeTypeService.class);
 		Iterable<AttributeType> attributeTypes = attributeTypeService.findAllAttributeTypes();
 		if (!attributeTypes.iterator().hasNext()) {

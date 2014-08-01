@@ -34,9 +34,6 @@ public class ProjectService {
 	@Transactional
 	public Project save(Project project){
 		project = projectRepository.save(project);
-		for (Batch batch : project.getBatchs()) {
-			save(batch);
-		}
 		return project;
 	}
 	
@@ -52,17 +49,11 @@ public class ProjectService {
 	@Transactional
 	public Batch save(Batch batch){
 		batch = batchRepository.save(batch);
-		for (Image image : batch.getImages()) {
-			save(image);
-		}
 		return batch;
 	}
 
 	public Image save(Image image) {
 		image = imageRepository.save(image);
-		for (Attribute attribute : image.getAttributes()) {
-			save(attribute);
-		}
 		return image;
 	}
 

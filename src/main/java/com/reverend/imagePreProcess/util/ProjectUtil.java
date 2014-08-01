@@ -12,17 +12,24 @@ import java.util.Set;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.reverend.imagePreProcess.model.Attribute;
+import com.reverend.imagePreProcess.model.AttributeType;
 import com.reverend.imagePreProcess.model.Batch;
 import com.reverend.imagePreProcess.model.Image;
 import com.reverend.imagePreProcess.model.Project;
+import com.reverend.imagePreProcess.service.AttributeTypeService;
 
 @Component
 public class ProjectUtil {
 
 	private static final String IMAGES = "images";
 	private final List<String> extList = new ArrayList<String>(Arrays.asList(".jpg", ".bmp"));
+	
+	@Autowired
+	private AttributeTypeService attributeTypeService;
 
 	public Project createProject(String path, String preProcessor, String supervisor) {
 		Project project = new Project();
@@ -52,23 +59,25 @@ public class ProjectUtil {
 
 	private void createImages(Batch batch, File projectFolder) {
 		Set<Image> images = new HashSet<Image>(0);
-		String imagePath = projectFolder.getAbsolutePath() + File.pathSeparator + batch.getPath() + File.pathSeparator + IMAGES;
+		String imagePath = projectFolder.getAbsolutePath() + File.separator + batch.getPath() + File.separator + IMAGES;
 		File imageFolder = new File(imagePath);
 		FileFilter filter = new SuffixFileFilter(extList, IOCase.INSENSITIVE);
 		File[] files = imageFolder.listFiles(filter);
-		for (int i = 0; i < files.length; i++) {
-			File file = files[i];
+		for (File file : files) {
 			Image image = new Image(batch, new Date(), new Date(), file.getName());
 			System.out.println(file.getName() + "-----------" + file.getAbsolutePath());
 			populateAttributes(image);
 			images.add(image);
 		}
+		
 		batch.setImages(images);
 	}
 
 	private void populateAttributes(Image image) {
-		// TODO Auto-generated method stub
-
+		Iterable<AttributeType> allAttributeTypes = attributeTypeService.findAllAttributeTypes();
+		for (AttributeType attributeType : allAttributeTypes) {
+			image.getAttributes().add(new Attribute(attributeType, image, new Date(), new Date(), ""));
+		}
 	}
 
 }

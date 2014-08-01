@@ -1,16 +1,14 @@
 package com.reverend.imagePreProcess.model;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -83,7 +81,7 @@ public class Attribute implements java.io.Serializable {
 		this.attributeType = attributeType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "IMAGE_ID", nullable = false)
 	public Image getImage() {
 		return this.image;

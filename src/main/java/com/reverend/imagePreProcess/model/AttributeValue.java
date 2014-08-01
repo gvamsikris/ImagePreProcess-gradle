@@ -1,16 +1,14 @@
 package com.reverend.imagePreProcess.model;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -70,7 +68,7 @@ public class AttributeValue implements java.io.Serializable {
 		this.version = version;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ATTRIBUTE_TYPE_ID", nullable = false)
 	public AttributeType getAttributeType() {
 		return this.attributeType;
