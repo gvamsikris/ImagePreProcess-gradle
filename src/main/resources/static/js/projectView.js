@@ -3,85 +3,109 @@
  */
 
 $(function() {
-	
+
 	var imageArray = [];
 	var imageIndex = 0;
-
-	var canvas = document.getElementById("canvas");
-	var context = canvas.getContext("2d");
-	var scale = 1.5;
-	var originx = 0;
-	var originy = 0;
 	var imageObj = new Image();
-	imageObj.src = 'file:///D:/images/StdRackBack.jpg';
-	
-	var zoom = function(zoomPar, mousex, mousey){
-		context.translate(originx, originy);
-		context.scale(zoomPar, zoomPar);
-		context.translate(
-				-(mousex / scale + originx - mousex / (scale * zoomPar)), 
-				-(mousey / scale + originy - mousey / (scale * zoomPar)));
 
-		originx = (mousex / scale + originx - mousex / (scale * zoomPar));
-		originy = (mousey / scale + originy - mousey / (scale * zoomPar));
-		scale *= zoomPar;
+	function drawImage(imageObj) {
+		
+		console.log("drawImage");
+		var stage = new Kinetic.Stage({
+			container : "container",
+			width : 800,
+			height : 600
+
+		});
+		var layer = new Kinetic.Layer();
+		layer.setDraggable("draggable");
+
+		// darth vader
+		// var canvasOffset=canvas.offset();
+		var darthVaderImg = new Kinetic.Image({
+			image : imageObj,
+			x : 0,
+			y : 0,
+			width : 800,
+			height : 600,
+
+		});
+
+		// add cursor styling
+		darthVaderImg.on('mouseover', function() {
+			document.body.style.cursor = 'pointer';
+		});
+		darthVaderImg.on('mouseout', function() {
+			document.body.style.cursor = 'default';
+		});
+		var zoomAmount = 1;
+		document.onkeydown = function(event) {
+			// console.log();
+			e = event || window.event; // because of Internet Explorer
+										// quirks...
+			k = e.which || e.charCode || e.keyCode; // because of browser
+													// differences...
+			// alert()
+			if (k == 65) {
+				zoomAmount = zoomAmount + 0.1;
+				zoom(zoomAmount);
+			} else if (k == 90) {
+				zoomAmount = zoomAmount - 0.1;
+				zoom(zoomAmount);
+			}
+
+		}
+		function zoom(zoomAmount) {
+			layer.setScale({
+				x : zoomAmount,
+				y : zoomAmount
+			})
+			console.log("---" + layer.getScale());
+			layer.draw();
+		}
+		var rotatedDegree = 0;
+		document.onkeyup = function(event) {
+			e = event || window.event; // because of Internet Explorer
+										// quirks...
+			k = e.which || e.charCode || e.keyCode; // because of browser
+													// differences...
+			if (k == 82 && e.altKey) {
+				if (rotatedDegree == 0) {
+					darthVaderImg.rotateDeg(90);
+					darthVaderImg.setX(darthVaderImg.getHeight());
+					rotatedDegree = 90;
+				} else {
+					darthVaderImg.rotateDeg(-90);
+					darthVaderImg.setX(0);
+					rotatedDegree = 0;
+				}
+
+				layer.draw();
+			}
+
+		}
+
+		layer.add(darthVaderImg);
+		stage.add(layer);
 	}
 
-	function draw() {
-		// From: http://goo.gl/jypct
-		// Store the current transformation matrix
-		context.save();
-
-		// Use the identity matrix while clearing the canvas
-		context.setTransform(1, 0, 0, 1, 0, 0);
-		context.clearRect(0, 0, canvas.width, canvas.height);
-
-		// Restore the transform
-		context.restore();
-
-		// Draw on transformed context
-		context.drawImage(imageObj, 0, 0, 600, 600);
-
-	}
-	
-	setInterval(draw, 100);
-	
-	canvas.onkeydown = function(){
-		var mousex = event.clientX - canvas.offsetLeft;
-		var mousey = event.clientY - canvas.offsetTop;
-		zoom(zoomPar, mousex, mousey);
-	}
-	
-	canvas.onmousewheel = function(event) {
-		var mousex = event.clientX - canvas.offsetLeft;
-		var mousey = event.clientY - canvas.offsetTop;
-		var wheel = event.wheelDelta / 120;// n or -n
-		// according to Chris comment
-		console.log("zoom");
-		var zoomPar = Math.pow(1 + Math.abs(wheel) / 2, wheel > 0 ? 1 : -1);
-		console.log(zoomPar);
-		console.log(mousex);
-		console.log(mousey);
-		zoom(zoomPar, mousex, mousey);
-	}
-	
-	$("#saveButton").click(function(){
+	$("#saveButton").click(function() {
 		var data = $("#imageForm").serialize();
 		console.log(data);
 		$.ajax({
-			"url": "/image",
-			"type": "POST",
-			"data": data,
-			"success": function(data){
+			"url" : "/image",
+			"type" : "POST",
+			"data" : data,
+			"success" : function(data) {
 				console.log(data);
 				imageIndex++;
-				if(imageIndex < imageArray.length){
+				if (imageIndex < imageArray.length) {
 					imageObj.src = "file:///" + imageArray[imageIndex].path;
-					draw();
+					drawImage(imageObj);
 					$("#imageForm").reset();
 				}
 			},
-			"error":function(){
+			"error" : function() {
 				alert("error in saving image data");
 			}
 		});
@@ -90,14 +114,16 @@ $(function() {
 	$(".batch").click(function() {
 		var batchId = $(this).attr("batchid");
 		console.log(batchId);
-		$.getJSON("/image/byBatch/" + batchId ,{date:new Date()}, function(data) {
-			//$("#mainImage").attr("src", "file:///" + data[0].path);
+		$.getJSON("/image/byBatch/" + batchId, {
+			date : new Date()
+		}, function(data) {
+			// $("#mainImage").attr("src", "file:///" + data[0].path);
 			console.log(data);
 			imageArray = data;
 			imageindex = 0;
 			imageObj.src = "file:///" + data[0].path;
 			$("#imageId").val(data[0].id);
-			draw();
+			drawImage(imageObj);
 		});
 	});
 
