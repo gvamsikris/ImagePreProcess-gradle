@@ -14,7 +14,7 @@ $(function() {
 		var stage = new Kinetic.Stage({
 			container : "container",
 			width : 800,
-			height : 600
+			height : 500
 
 		});
 		var layer = new Kinetic.Layer();
@@ -27,7 +27,7 @@ $(function() {
 			x : 0,
 			y : 0,
 			width : 800,
-			height : 600,
+			height : 500,
 
 		});
 
