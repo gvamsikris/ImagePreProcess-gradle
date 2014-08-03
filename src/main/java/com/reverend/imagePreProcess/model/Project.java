@@ -38,6 +38,7 @@ public class Project implements java.io.Serializable {
 	private String path;
 	private String preProcessor;
 	private String supervisor;
+	private long noOfBatches;  
 	private List<Batch> batchs = new ArrayList<Batch>(0);
 
 	public Project() {
@@ -135,6 +136,15 @@ public class Project implements java.io.Serializable {
 
 	public void setBatchs(List<Batch> batchs) {
 		this.batchs = batchs;
+	}
+	
+	@Column(name = "NO_OF_BATCHES", nullable = true)
+	public long getNoOfBatches() {
+		return noOfBatches;
+	}
+
+	public void setNoOfBatches(long noOfBatches) {
+		this.noOfBatches = noOfBatches;
 	}
 
 }

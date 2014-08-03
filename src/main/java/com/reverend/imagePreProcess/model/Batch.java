@@ -41,6 +41,7 @@ public class Batch implements java.io.Serializable {
 	private Date dateCreated;
 	private Date lastUpdated;
 	private String path;
+	private long noOfImages;
 	private Set<Image> images = new HashSet<Image>(0);
 
 	public Batch() {
@@ -128,6 +129,15 @@ public class Batch implements java.io.Serializable {
 
 	public void setImages(Set<Image> images) {
 		this.images = images;
+	}
+
+	@Column(name = "NO_OF_IMAGES", nullable = true)
+	public long getNoOfImages() {
+		return noOfImages;
+	}
+
+	public void setNoOfImages(long noOfImages) {
+		this.noOfImages = noOfImages;
 	}
 
 }

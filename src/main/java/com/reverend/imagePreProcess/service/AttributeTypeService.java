@@ -1,6 +1,7 @@
 package com.reverend.imagePreProcess.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.reverend.imagePreProcess.dao.AttributeTypeRepository;
@@ -21,7 +22,7 @@ public class AttributeTypeService {
 	}
 	
 	public Iterable<AttributeType> findAllAttributeTypes(){
-		return attributeTypeRepository.findAll();
+		return attributeTypeRepository.findAll(new Sort("id"));
 	}
 
 	public AttributeType save(AttributeType attributeType) {

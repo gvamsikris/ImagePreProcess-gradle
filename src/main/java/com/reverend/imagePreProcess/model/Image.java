@@ -31,33 +31,44 @@ import javax.persistence.Version;
 @Table(name = "IMAGE", schema = "PUBLIC", catalog = "BOOTDB")
 public class Image implements java.io.Serializable {
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2354326996494212763L;
+	public static final String SAVED = "saved";
+	public static final String NEW = "new";
+	
 	private Long id;
 	private long version;
 	private Batch batch;
 	private Date dateCreated;
 	private Date lastUpdated;
 	private String name;
+	private String path;
+	private String status;
 	private Set<Attribute> attributes = new HashSet<Attribute>(0);
 
 	public Image() {
+		setStatus(NEW);
 	}
 
-	public Image(Batch batch, Date dateCreated, Date lastUpdated, String name) {
+	public Image(Batch batch, Date dateCreated, Date lastUpdated, String name, String path, String status) {
 		this.batch = batch;
 		this.dateCreated = dateCreated;
 		this.lastUpdated = lastUpdated;
 		this.name = name;
+		this.path = path;
+		this.status = status;
 	}
 
-	public Image(Batch batch, Date dateCreated, Date lastUpdated, String name, Set<Attribute> attributes) {
+	public Image(Batch batch, Date dateCreated, Date lastUpdated, String name, String path, String status, Set<Attribute> attributes) {
 		this.batch = batch;
 		this.dateCreated = dateCreated;
 		this.lastUpdated = lastUpdated;
 		this.name = name;
+		this.path = path;
+		this.status = status;
 		this.attributes = attributes;
 	}
 
@@ -116,18 +127,37 @@ public class Image implements java.io.Serializable {
 	public String getName() {
 		return this.name;
 	}
+	
 
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Column(name = "PATH", nullable = false)
+	public String getPath() {
+		return this.path;
+	}
+	
+	public void setPath(String path) {
+		this.path = path;
+	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "image", cascade=CascadeType.ALL)
 	public Set<Attribute> getAttributes() {
 		return this.attributes;
 	}
 
 	public void setAttributes(Set<Attribute> attributes) {
 		this.attributes = attributes;
+	}
+
+	@Column(name = "STATUS", nullable = true)
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

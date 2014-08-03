@@ -1,18 +1,19 @@
 package com.reverend.imagePreProcess.model;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class AttributeType implements java.io.Serializable {
 	private Date dateCreated;
 	private Date lastUpdated;
 	private String name;
-	private Set<AttributeValue> attributeValues = new HashSet<AttributeValue>(0);
+	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>(0);
 	private Set<Attribute> attributes = new HashSet<Attribute>(0);
 
 	public AttributeType() {
@@ -50,7 +51,7 @@ public class AttributeType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public AttributeType(Date dateCreated, Date lastUpdated, String name, Set<AttributeValue> attributeValues, Set<Attribute> attributes) {
+	public AttributeType(Date dateCreated, Date lastUpdated, String name, List<AttributeValue> attributeValues, Set<Attribute> attributes) {
 		this.dateCreated = dateCreated;
 		this.lastUpdated = lastUpdated;
 		this.name = name;
@@ -108,12 +109,12 @@ public class AttributeType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attributeType", cascade=CascadeType.ALL)
-	public Set<AttributeValue> getAttributeValues() {
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "attributeType", cascade=CascadeType.ALL)
+	public List<AttributeValue> getAttributeValues() {
 		return this.attributeValues;
 	}
 
-	public void setAttributeValues(Set<AttributeValue> attributeValues) {
+	public void setAttributeValues(List<AttributeValue> attributeValues) {
 		this.attributeValues = attributeValues;
 	}
 

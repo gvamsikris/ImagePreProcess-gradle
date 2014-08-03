@@ -55,6 +55,7 @@ public class ProjectUtil {
 			}
 		}
 		project.setBatchs(batchs);
+		project.setNoOfBatches(batchs.size());
 	}
 
 	private void createImages(Batch batch, File projectFolder) {
@@ -64,13 +65,12 @@ public class ProjectUtil {
 		FileFilter filter = new SuffixFileFilter(extList, IOCase.INSENSITIVE);
 		File[] files = imageFolder.listFiles(filter);
 		for (File file : files) {
-			Image image = new Image(batch, new Date(), new Date(), file.getName());
-			System.out.println(file.getName() + "-----------" + file.getAbsolutePath());
+			Image image = new Image(batch, new Date(), new Date(), file.getName(), file.getAbsolutePath(), Image.NEW);
 			populateAttributes(image);
 			images.add(image);
 		}
-		
 		batch.setImages(images);
+		batch.setNoOfImages(images.size());
 	}
 
 	private void populateAttributes(Image image) {

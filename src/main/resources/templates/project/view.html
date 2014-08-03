@@ -3,25 +3,42 @@
 	<head>
 		<title>Layout</title>
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/css/application.css}" href="../../css/application.css" />
 		<script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../js/jquery.min.js"></script>
 		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" th:src="@{/js/angular.min.js}" src="../../js/angular.min.js"></script>
-		<script type="text/javascript">
-			
-		</script>
+		<script type="text/javascript" th:src="@{/js/projectView.js}" src="../../js/angular.min.js"></script>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container-fluid" id="main">
 			<div class="page-header">
 				<h1><a href="/"><img alt="Reverend" th:src="@{/images-res/logo.jpg}" src="../../images-res/logo.jpg" /></a>Reverend <small>Image Pre Process</small></h1>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<ul>
-						<li th:each="batch :${project.batchs}" th:text="${batch.path}"></li>
+			<div class="row" id="batchContainer">
+				<div class="col-md-3" style="overflow: auto;height: 600px; position: relative;" >
+					<ul class="list-group">
+						<li th:each="batch :${project.batchs}" class="list-group-item"><button class="btn btn-link batch" th:id="${'batch' + batch.id}" th:attr="batchId=${batch.id}"><span th:text="${batch.path}"></span></button><span class="badge" th:text="${batch.noOfImages}"></span></li>
 					</ul>
 				</div>
-				<div class="col-md-8"></div>
+				<div class="col-md-9">
+					<div>
+						<canvas width="800" height="500" id="canvas" style="border:1px solid black;"></canvas>
+						<form action="" method="" class="form-inline" role="form" id="imageForm">
+							<input type="hidden" id="imageId" name="imageId" value=""/>
+							<div th:each="attributeType : ${attributeTypes}" class="form-group">
+								<label th:for="${'attributeType' + attributeType.id}" th:text="${attributeType.name}"></label>
+								<div th:if="${attributeType.attributeValues.size()} == 0">
+									<input type="text" th:name="${'attributeType' + attributeType.id}" th:id="${'attributeType' + attributeType.id}" value="" class="form-control"/>
+								</div>
+								<div th:unless="${attributeType.attributeValues.size()} == 0">
+									<select th:name="${'attributeType' + attributeType.id}" th:id="${'attributeType' + attributeType.id}" value="" class="form-control">
+										<option th:each="attributeValue : ${attributeType.attributeValues}" th:text="${attributeValue.value}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group"><button type="button" id="saveButton">Save</button></div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
