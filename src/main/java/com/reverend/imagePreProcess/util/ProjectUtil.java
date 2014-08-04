@@ -62,7 +62,7 @@ public class ProjectUtil {
 		Set<Image> images = new HashSet<Image>(0);
 		String imagePath = projectFolder.getAbsolutePath() + File.separator + batch.getPath() + File.separator + IMAGES;
 		File imageFolder = new File(imagePath);
-		FileFilter filter = new SuffixFileFilter(extList, IOCase.INSENSITIVE);
+		FileFilter filter = new SuffixFileFilter(extList);
 		File[] files = imageFolder.listFiles(filter);
 		for (File file : files) {
 			Image image = new Image(batch, new Date(), new Date(), file.getName(), file.getAbsolutePath(), Image.NEW);
