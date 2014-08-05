@@ -7,6 +7,7 @@ $(function() {
 	var imageArray = [];
 	var imageIndex = 0;
 	var imageObj = new Image();
+	var darthVaderImg;
 
 	function drawImage(imageObj) {
 		
@@ -22,7 +23,7 @@ $(function() {
 
 		// darth vader
 		// var canvasOffset=canvas.offset();
-		var darthVaderImg = new Kinetic.Image({
+		darthVaderImg = new Kinetic.Image({
 			image : imageObj,
 			x : 0,
 			y : 0,
@@ -45,13 +46,27 @@ $(function() {
 										// quirks...
 			k = e.which || e.charCode || e.keyCode; // because of browser
 													// differences...
+			
 			// alert()
-			if (k == 65) {
+			if (k == 65 && e.ctrlKey) {
+				e.stopPropagation();
 				zoomAmount = zoomAmount + 0.1;
 				zoom(zoomAmount);
-			} else if (k == 90) {
+			} else if (k == 90 && e.ctrlKey) {
+				e.stopPropagation();
 				zoomAmount = zoomAmount - 0.1;
 				zoom(zoomAmount);
+			}
+			if (k == 37 && e.ctrlKey) {
+				console.log("move left");
+				if(darthVaderImg){
+					darthVaderImg.move(-5, 0);
+				}
+			} else if (k == 39 && e.ctrlKey) {
+				console.log("move right");
+				if(darthVaderImg){
+					darthVaderImg.move(5, 0);
+				}
 			}
 
 		}
@@ -102,7 +117,9 @@ $(function() {
 				if (imageIndex < imageArray.length) {
 					imageObj.src = "file:///" + imageArray[imageIndex].path;
 					drawImage(imageObj);
-					$("#imageForm").reset();
+					$("#attributeType1").focus();
+				} else {
+					alert("No more images left. Please select another batch");
 				}
 			},
 			"error" : function() {
@@ -119,11 +136,15 @@ $(function() {
 		}, function(data) {
 			// $("#mainImage").attr("src", "file:///" + data[0].path);
 			console.log(data);
-			imageArray = data;
-			imageindex = 0;
-			imageObj.src = "file:///" + data[0].path;
-			$("#imageId").val(data[0].id);
-			drawImage(imageObj);
+			if(data != undefined && data.length > 0){
+				imageArray = data;
+				imageindex = 0;
+				imageObj.src = "file:///" + data[0].path;
+				$("#imageId").val(data[0].id);
+				drawImage(imageObj);
+			} else {
+				alert("No images in this batch. Please select another batch");
+			}
 		});
 	});
 
